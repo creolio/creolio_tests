@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import split_fr as split_fr
@@ -52,6 +53,23 @@ def write_text_to_file(filename, text):
     with open(filename, 'w') as f:
         f.write(text)
 
+def calculate_frequencies(words):
+    result = {}
+
+    for word in words:
+        if word in result:
+            result[word] += 1
+        else:
+            result[word] = 1
+
+    result = dict(sorted(result.items(), key=lambda item: item[1], reverse = True))
+
+    return result
+
+def save_json(filename, object):
+    with open(filename, 'w', encoding="utf8") as outfile:
+        json.dump(object, outfile)
+
 def process_srts_in_folder(folder):
     for file in os.listdir(folder):
         if file.endswith(".srt"):
@@ -64,7 +82,7 @@ def process_srts_in_folder(folder):
 
             if filename.endswith("_fr.srt"):
                 words = split_fr.split_into_words(text)
-                print(words)
+                save_json(filename + ".json", calculate_frequencies(words))
 
 process_srts_in_folder(script_directory)
 
