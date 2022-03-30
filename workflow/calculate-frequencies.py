@@ -7,7 +7,7 @@ script_directory = os.path.dirname(os.path.realpath(__file__))
 def read_chunks_from_srt(filename):
     result = []
     
-    with open(filename) as file:
+    with open(filename, encoding="utf8") as file:
         chunk = read_chunk(file)
 
         while chunk != None:
