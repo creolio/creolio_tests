@@ -1,6 +1,6 @@
 import os
 import re
-
+import split_fr as split_fr
 
 script_directory = os.path.dirname(os.path.realpath(__file__))
 
@@ -48,22 +48,25 @@ def remove_html_from_string(value):
     cleantext = re.sub(CLEANR, '', value)
     return cleantext
 
-def split_into_words(text):
-    pass
-
 def write_text_to_file(filename, text):
     with open(filename, 'w') as f:
         f.write(text)
 
-for file in os.listdir(script_directory):
-    if file.endswith(".srt"):
-        filename = os.path.join(script_directory, file)
-        print(f"  - processing {filename} ...")
-        text = get_text_from(filename)
-        text = remove_html_from_string(text)
-        write_text_to_file(filename + ".txt", text)
+def process_srts_in_folder(folder):
+    for file in os.listdir(folder):
+        if file.endswith(".srt"):
+            filename = os.path.join(folder, file)
+            print(f"  - processing {filename} ...")
+            
+            text = get_text_from(filename)
+            text = remove_html_from_string(text)
+            write_text_to_file(filename + ".txt", text)
 
+            if filename.endswith("_fr.srt"):
+                words = split_fr.split_into_words(text)
+                print(words)
 
+process_srts_in_folder(script_directory)
 
 
         
