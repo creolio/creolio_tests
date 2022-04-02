@@ -2,7 +2,7 @@ from srtfiles import srtreader
 from helpers import environment
 from helpers import file
 from textprocessing import frequencies
-import split_fr as split_fr
+import workflow.source.split_fr as split_fr
 
 script_directory = environment.get_path_from_filepath(__file__)
 
