@@ -71,7 +71,7 @@
         const movieId = movieObj.movieId;
 
         const usableTracks = [];
-        // console.log('timedtexttracks', movieObj.timedtexttracks);
+        console.log('timedtexttracks', movieObj.timedtexttracks);
         for (const track of movieObj.timedtexttracks) {
             if (track.isForcedNarrative || track.isNoneTrack) {
                 continue; // don't want these
@@ -377,7 +377,7 @@
             const customSubsElem = document.createElement("div");
             customSubsElem.id = CUSTOM_SUBS_ELEM_ID;
             customSubsElem.style.cssText =
-                "position: absolute; bottom: 20vh; left: 0; right: 0; color: white; font-size: 3vw; text-align: center; user-select: text; -moz-user-select: text; z-index: 100; pointer-events: none";
+                "position: absolute; bottom: 20vh; left: 0; right: 0; color: white; font-size: 3vw; text-align: center; user-select: text; -moz-user-select: text; z-index: 100; pointer-events: none;background-color:yellow";
 
             trackElem.addEventListener(
                 "cuechange",
@@ -393,7 +393,7 @@
                         const cueElem = document.createElement("div");
                         cueElem.style.cssText =
                             "background: rgba(0,0,0,0.8); white-space: pre-wrap; padding: 0.2em 0.3em; margin: 10px auto; width: fit-content; width: -moz-fit-content; pointer-events: auto";
-                        cueElem.innerHTML = vttTextToSimple(cue.text, true); // may contain simple tags like <i> etc.
+                        cueElem.innerHTML = "Jon says: " + vttTextToSimple(cue.text, true); // may contain simple tags like <i> etc.
                         customSubsElem.appendChild(cueElem);
                     }
                 },
