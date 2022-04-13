@@ -37,6 +37,13 @@
     let targetTrackBlob = null;
     let displayedTrackBlob = null;
 
+    function applyContentChange(subtitlePart) {
+        const replaceWith = "<strong style='color:blue'>is</strong>";
+        const replace = "est";
+        const result = subtitlePart.replaceAll(replace, replaceWith);
+        return result;
+    }
+
     // Convert WebVTT text to plain text plus "simple" tags (allowed in SRT)
     const TAG_REGEX = RegExp("</?([^>]*)>", "ig");
     function vttTextToSimple(s, netflixRTLFix) {
@@ -393,7 +400,7 @@
                         const cueElem = document.createElement("div");
                         cueElem.style.cssText =
                             "background: rgba(0,0,0,0.8); white-space: pre-wrap; padding: 0.2em 0.3em; margin: 10px auto; width: fit-content; width: -moz-fit-content; pointer-events: auto";
-                        cueElem.innerHTML = "Jon says: " + vttTextToSimple(cue.text, true); // may contain simple tags like <i> etc.
+                        cueElem.innerHTML = applyContentChange(vttTextToSimple(cue.text, true)); // may contain simple tags like <i> etc.
                         customSubsElem.appendChild(cueElem);
                     }
                 },
